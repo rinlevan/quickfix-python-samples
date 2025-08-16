@@ -1,0 +1,9 @@
+.vscode
+initiator/Logs
+initiator/Sessions
+acceptor/Logs
+acceptor/Sessions
+__pycache__
+*.pyc
+*.log
+.python-version

@@ -1,4 +1,7 @@
 #!/bin/sh
-cd ./initiator
-sleep 5
+cd ${WORKING_DIR}
+sleep 3
+rm -fr ./Sessions && mkdir -p ./Sessions && chmod 755 ./Sessions
+sed -i "s/^SocketConnectHost=.*/SocketConnectHost=acceptor/" client.cfg
+sed -i "s/^SocketConnectPort=.*/SocketConnectPort=${APP_PORT}/" client.cfg
 python client.py client.cfg

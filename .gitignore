@@ -3,9 +3,11 @@
 *.log
 .vscode
 __pycache__
-/acceptor/Logs/*
-/acceptor/Sessions/*
-/initiator/Logs/*
-/initiator/Sessions/*
+/acceptor/Logs/
+/acceptor/Sessions/
+/initiator/Logs/
+/initiator/Sessions/
 /Pipfile
 /Pipfile.lock
+.python-version
+.env

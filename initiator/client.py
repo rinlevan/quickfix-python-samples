@@ -1,5 +1,5 @@
 """FIX GATEWAY"""
-import sys
+import sys, os
 import argparse
 import quickfix
 from application import Application
@@ -19,7 +19,6 @@ def main(config_file):
 
     except (quickfix.ConfigError, quickfix.RuntimeError) as e:
         print(e)
-        initiator.stop()
         sys.exit()
 
 if __name__=='__main__':

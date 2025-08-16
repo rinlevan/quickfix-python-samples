@@ -1,16 +1,16 @@
+
 version: '3'
 
 services:
   acceptor:
     build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
+      context: .
+      dockerfile: ./acceptor/Dockerfile
     restart: always
-    working_dir: ${WORKING_DIR}
     volumes:
-      - ../:${WORKING_DIR}
+      - ./acceptor:${WORKING_DIR}
     command:
-      - ${WORKING_DIR}/acceptor/start.sh
+      - ${WORKING_DIR}/start.sh
     stdin_open: true
     tty: true
     env_file:
@@ -22,14 +22,13 @@ services:
   
   initiator:
     build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
+      context: .
+      dockerfile: ./initiator/Dockerfile
     restart: always
-    working_dir: ${WORKING_DIR}
     volumes:
-      - ../:${WORKING_DIR}
+      - ./initiator:${WORKING_DIR}
     command:
-      - ${WORKING_DIR}/initiator/start.sh
+      - ${WORKING_DIR}/start.sh
     stdin_open: true
     tty: true
     env_file:

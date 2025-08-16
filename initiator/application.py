@@ -10,8 +10,8 @@ from model.logger import setup_logger
 __SOH__ = chr(1)
 
 # Logger
-setup_logger('logfix', 'Logs/message.log')
-logfix = logging.getLogger('logfix')
+setup_logger('initiator', 'Logs/initiator-message.log')
+logfix = logging.getLogger('initiator')
 
 
 class Application(fix.Application):
