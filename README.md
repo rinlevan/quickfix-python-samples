@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ### Using Docker
 
-1. Create a `.env` file at same directory level as docker-compose, for example:
+1. Create a .env file in the same directory as the docker-compose.yml file, for example:
    ```sh
    APP_PORT=3000
    WORKING_DIR=/app
@@ -49,6 +49,7 @@ pip install -r requirements.txt
 ⚠️ **Important:** Start the **server** first, then start the **client**.  
 This is required for QuickFIX to establish a valid FIX protocol connection.  
 Make sure to edit `client.cfg` and `server.cfg` beforehand.
+
 Create Sessions folder for both initiator and acceptor
 ```bash
 rm -fr ./Sessions && mkdir -p ./Sessions && chmod 755 ./Sessions
