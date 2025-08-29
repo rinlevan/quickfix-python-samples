@@ -1,15 +1,19 @@
-FROM python:3.10.12-slim AS builder
-
-WORKDIR /src
-
-COPY requirements.txt .
+FROM python:3.10.12-slim AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential gcc libffi-dev \
-    && pip install --no-cache-dir -U pip \
-    && pip install --no-cache-dir -r requirements.txt
+        curl build-essential gcc libffi-dev
 
+ADD https://astral.sh/uv/install.sh /uv-installer.sh
+RUN sh /uv-installer.sh && rm /uv-installer.sh
+ENV PATH="/root/.local/bin/:$PATH"
+RUN uv self update
+
+FROM base AS builder
+WORKDIR /src
+COPY requirements.txt .
 COPY ./initiator .
+RUN uv venv \
+    && uv pip sync requirements.txt
 
 FROM builder AS runtime
 ARG WORKING_DIR=${WORKING_DIR}
