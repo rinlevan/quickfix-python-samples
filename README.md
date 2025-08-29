@@ -53,8 +53,8 @@ pip install -r requirements.txt
 <summary>On Terminal</summary>
 
 ⚠️ **Important:** Start the **acceptor** first, then start the **initiator**.  
-This is required for QuickFIX to establish a valid FIX protocol connection.  
-Make sure to edit `client.cfg` and `server.cfg` beforehand.
+
+Make sure to configure both `client.cfg` and `server.cfg` beforehand.
 
 Create Sessions folder for both initiator and acceptor
 
