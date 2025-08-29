@@ -5,16 +5,6 @@
 
 ---
 
-## 📑 Table of Contents
-
-1. [Requirements](#requirements)
-2. [Setup](#setup)
-3. [Running the Project](#running-the-project)  
-   - [Using Docker](#using-docker)  
-   - [Running via Terminal](#running-via-terminal)
-
----
-
 ## Requirements
 
 - Python **3.x**
@@ -32,24 +22,24 @@ pip install -r requirements.txt
 
 ---
 
-## Running the Project
+## Start the project
 
-### Using Docker
-
-1. Create a .env file in the same directory as the docker-compose.yml file, for example:
+<details>
+<summary>Using Docker</summary>
+1; Create a .env file in the same directory as the docker-compose.yml file, for example:
 
    ```sh
    APP_PORT=3000
    WORKING_DIR=/app
    ```
 
-2. Build and run with Docker Compose:
+2; Build and run with Docker Compose:
 
    ```sh
    docker-compose up --build
    ```
 
-3. If you want to provide input directly from the keyboard (interactive mode), use docker exec to open a shell inside the running container. For example:
+3; If you want to provide input directly from the keyboard (interactive mode), use docker exec to open a shell inside the running container. For example:
 
    ```bash
    docker exec -it <container_name> bash
@@ -57,9 +47,12 @@ pip install -r requirements.txt
 
    Replace <container_name> with the actual name or ID of your running container.
 
-### Running via Terminal
+</details>
 
-⚠️ **Important:** Start the **server** first, then start the **client**.  
+<details>
+<summary>On Terminal</summary>
+
+⚠️ **Important:** Start the **acceptor** first, then start the **initiator**.  
 This is required for QuickFIX to establish a valid FIX protocol connection.  
 Make sure to edit `client.cfg` and `server.cfg` beforehand.
 
@@ -69,20 +62,21 @@ Create Sessions folder for both initiator and acceptor
 rm -fr ./Sessions && mkdir -p ./Sessions && chmod 755 ./Sessions
 ```
 
-#### 1. Run Server (Acceptor)
+1; Start Server (Acceptor)
 
 ```bash
 cd ./acceptor
 python server.py server.cfg
 ```
 
-#### 2. Run Client (Initiator)
+2; Start Client (Initiator)
 
 ```bash
 cd ./initiator
 python client.py client.cfg
 ```
 
+</details>
 ---
 
 ✅ You are now ready to test the FIX connection between the Client and Server.
