@@ -17,38 +17,38 @@ class Application(fix.Application):
 
     def onCreate(self, sessionID):
         """onCreate"""
-        print("onCreate : Session (%s)" % sessionID.toString())
+        logfix.info("onCreate : Session (%s)" % sessionID.toString())
         return
 
     def onLogon(self, sessionID):
         """onLogon"""
         self.sessionID = sessionID
-        print("Successful Logon to session '%s'." % sessionID.toString())
+        logfix.info("Successful Logon to session '%s'." % sessionID.toString())
         return
 
     def onLogout(self, sessionID):
         """onLogout"""
-        print("Session (%s) logout !" % sessionID.toString())
+        logfix.info("Session (%s) logout !" % sessionID.toString())
         return
 
     def toAdmin(self, message, sessionID):
         msg = message.toString().replace(__SOH__, "|")
-        logfix.debug("(Admin) S >> %s" % msg)
+        logfix.info("(Admin) S >> %s" % msg)
         return
 
     def fromAdmin(self, message, sessionID):
         msg = message.toString().replace(__SOH__, "|")
-        logfix.debug("(Admin) R << %s" % msg)
+        logfix.info("(Admin) R << %s" % msg)
         return
 
     def toApp(self, message, sessionID):
         msg = message.toString().replace(__SOH__, "|")
-        logfix.debug("(App) S >> %s" % msg)
+        logfix.info("(App) S >> %s" % msg)
         return
 
     def fromApp(self, message, sessionID):
         msg = message.toString().replace(__SOH__, "|")
-        logfix.debug("(App) R << %s" % msg)
+        logfix.info("(App) R << %s" % msg)
         self.onMessage(message, sessionID)
         return
     

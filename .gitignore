@@ -4,7 +4,6 @@
 /initiator/Sessions/
 /Pipfile
 /Pipfile.lock
-*.cpython-37.pyc
 *.pyc
 *.log
 .vscode

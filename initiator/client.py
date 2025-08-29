@@ -1,5 +1,5 @@
 """FIX GATEWAY"""
-import sys, os
+import sys
 import argparse
 import quickfix
 from application import Application

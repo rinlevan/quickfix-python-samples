@@ -1,20 +1,18 @@
-
-version: '3'
-
 services:
   acceptor:
     build:
       context: .
       dockerfile: ./acceptor/Dockerfile
-    restart: always
-    volumes:
-      - ./acceptor:${WORKING_DIR}
-    command:
-      - ${WORKING_DIR}/start.sh
+      args:
+        WORKING_DIR: ${WORKING_DIR}
+        APP_PORT: ${APP_PORT}
+    restart: unless-stopped
     stdin_open: true
     tty: true
     env_file:
       - .env
+    environment:
+      - APP_PORT=${APP_PORT}
     ports:
       - ${APP_PORT}:${APP_PORT}
     networks:
@@ -24,15 +22,18 @@ services:
     build:
       context: .
       dockerfile: ./initiator/Dockerfile
-    restart: always
-    volumes:
-      - ./initiator:${WORKING_DIR}
-    command:
-      - ${WORKING_DIR}/start.sh
+      args:
+        WORKING_DIR: ${WORKING_DIR}
+    depends_on:
+      acceptor:
+        condition: service_started
+    restart: unless-stopped
     stdin_open: true
     tty: true
     env_file:
       - .env
+    environment:
+      - APP_PORT=${APP_PORT}
     links:
       - acceptor
     networks:
