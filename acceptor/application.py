@@ -60,6 +60,9 @@ class Application(fix.Application):
         message.getHeader().getField( beginString )
         message.getHeader().getField( msgType )
 
+        if msgType.getValue() != fix.MsgType_NewOrderSingle:
+            return
+
         symbol = fix.Symbol()
         side = fix.Side()
         ordType = fix.OrdType()

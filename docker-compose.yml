@@ -15,6 +15,12 @@ services:
       - APP_PORT=${APP_PORT}
     ports:
       - ${APP_PORT}:${APP_PORT}
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s = socket.socket(); s.connect(('localhost', $APP_PORT))\""]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
     networks:
       - quickfix
   
@@ -26,7 +32,7 @@ services:
         WORKING_DIR: ${WORKING_DIR}
     depends_on:
       acceptor:
-        condition: service_started
+        condition: service_healthy
     restart: unless-stopped
     stdin_open: true
     tty: true

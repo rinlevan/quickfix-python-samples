@@ -14,8 +14,12 @@ def main(config_file):
         initiator = quickfix.SocketInitiator(application, storefactory, settings, logfactory)
 
         initiator.start()
-        application.run()
-        initiator.stop()
+        try:
+            application.run()
+        except KeyboardInterrupt:
+            pass
+        finally:
+            initiator.stop()
 
     except (quickfix.ConfigError, quickfix.RuntimeError) as e:
         print(e)

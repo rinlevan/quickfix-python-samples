@@ -14,8 +14,12 @@ def main(config_file):
         acceptor = quickfix.SocketAcceptor(application, storefactory, settings, logfactory)
 
         acceptor.start()
-        application.run()
-        acceptor.stop()
+        try:
+            application.run()
+        except KeyboardInterrupt:
+            pass
+        finally:
+            acceptor.stop()
         
 
     except (quickfix.ConfigError, quickfix.RuntimeError) as e:

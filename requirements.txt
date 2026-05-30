@@ -1,1 +1,1 @@
-quickfix==1.15.1
+quickfix-binary==1.15.1

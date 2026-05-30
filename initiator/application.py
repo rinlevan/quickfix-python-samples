@@ -18,17 +18,21 @@ class Application(fix.Application):
     """FIX Application"""
     ClOrdID = 0
 
+    def __init__(self):
+        super().__init__()
+        self.sessionID = None
+
     def onCreate(self, sessionID):
-        print("onCreate : Session (%s)" % sessionID.toString())
+        logfix.info("onCreate : Session (%s)" % sessionID.toString())
         return
 
     def onLogon(self, sessionID):
         self.sessionID = sessionID
-        print("Successful Logon to session '%s'." % sessionID.toString())
+        logfix.info("Successful Logon to session '%s'." % sessionID.toString())
         return
 
     def onLogout(self, sessionID):
-        print("Session (%s) logout !" % sessionID.toString())
+        logfix.info("Session (%s) logout !" % sessionID.toString())
         return
 
     def toAdmin(self, message, sessionID):
@@ -60,6 +64,10 @@ class Application(fix.Application):
 
     def put_new_order(self):
         """Request sample new order single"""
+        if not self.sessionID:
+            print("Session is not logged on yet. Please wait...")
+            return
+
         message = fix.Message()
         header = message.getHeader()
 
@@ -83,13 +91,17 @@ class Application(fix.Application):
     def run(self):
         """Run"""
         while 1:
-            options = str(input("Please choose 1 for Put New Order or 2 for Exit!\n"))
+            try:
+                options = str(input("Please choose 1 for Put New Order or 2 for Exit!\n"))
+            except EOFError:
+                time.sleep(5)
+                continue
             if options == '1':
                 self.put_new_order()
                 print("Done: Put New Order\n")
                 continue
             if  options == '2':
-                sys.exit(0)
+                break
             else:
                 print("Valid input is 1 for order, 2 for exit\n")
             time.sleep(2)
