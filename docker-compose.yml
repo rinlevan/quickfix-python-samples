@@ -1,5 +1,6 @@
 services:
   acceptor:
+    container_name: quickfix_acceptor
     build:
       context: .
       dockerfile: ./acceptor/Dockerfile
@@ -25,6 +26,7 @@ services:
       - quickfix
   
   initiator:
+    container_name: quickfix_initiator
     build:
       context: .
       dockerfile: ./initiator/Dockerfile

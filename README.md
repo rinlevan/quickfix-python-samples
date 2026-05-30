@@ -66,9 +66,9 @@ Docker Compose orchestrates both Acceptor and Initiator containers automatically
      ```
    * To open an interactive shell inside the Initiator container:
      ```bash
-     docker exec -it quickfix-python-samples-initiator-1 bash
+     docker exec -it quickfix_initiator bash
+     docker exec -it quickfix_acceptor bash
      ```
-
 ---
 
 ### Option B: Local Terminal Setup
